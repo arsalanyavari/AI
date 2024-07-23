@@ -1,0 +1,43 @@
+name: Convert IPython Notebooks to Markdown
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install Jupyter
+      run: |
+        pip install jupyter
+        pip install nbconvert
+
+    - name: Convert .ipynb to .md
+      run: |
+        find . -name '*.ipynb' | while read notebook; do
+          md_file="${notebook%.*}.md"
+          if [ ! -f "$md_file" ]; then
+            jupyter-nbconvert --to markdown "$notebook"
+          fi
+        done
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "Convert .ipynb files to markdown"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
