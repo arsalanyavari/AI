@@ -26,10 +26,7 @@ jobs:
     - name: Convert .ipynb to .md
       run: |
         find . -name '*.ipynb' | while read notebook; do
-          md_file="${notebook%.*}.md"
-          if [ ! -f "$md_file" ]; then
-            jupyter-nbconvert --to markdown "$notebook"
-          fi
+          jupyter-nbconvert --to markdown "$notebook"
         done
 
     - name: Commit and Push Changes
