@@ -26,8 +26,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn import linear_model
-from sklearn.metrics import r2_score
 from scipy.optimize import curve_fit
 
 %matplotlib inline
@@ -847,7 +845,7 @@ print("R2-score: %.2f" % r2_score(y_hat , test_y) )
 ```
 
     beta_1 = 430.034235, beta_2 = 0.995297
-    Mean absolute error: 0.05
+    Mean absolute error: 0.04
     Residual sum of squares (MSE): 0.00
-    R2-score: 0.96
+    R2-score: 0.97
 

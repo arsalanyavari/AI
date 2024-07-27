@@ -21,7 +21,6 @@ Import needed libraries
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import pylab as pl
 from sklearn.model_selection import train_test_split
 from sklearn import linear_model
 from sklearn.metrics import r2_score
@@ -208,8 +207,8 @@ plt.show()
 
 ```python
 # print(df)
-train, temp = train_test_split(df, test_size=0.25, random_state=42)
-test, evaluate = train_test_split(temp, test_size=0.5, random_state=42)
+train, test = train_test_split(df, test_size=0.20, random_state=42)
+# test, evaluate = train_test_split(test, test_size=0.5, random_state=42)
 ```
 
 
@@ -218,7 +217,6 @@ fig = plt.figure()
 ax1 = fig.add_subplot()
 ax1.scatter(train.Hours, train.Scores, color="blue")
 ax1.scatter(test.Hours, test.Scores, color="red")
-ax1.scatter(evaluate.Hours, evaluate.Scores, color="green")
 plt.ylabel("Scores")
 plt.xlabel("Hours of studying")
 plt.show()
@@ -243,8 +241,8 @@ print("Coefficients:\t", reg.coef_)
 print("Intercept:\t", reg.intercept_)
 ```
 
-    Coefficients:	 [[9.86801899]]
-    Intercept:	 [1.90944816]
+    Coefficients:	 [[9.86089296]]
+    Intercept:	 [1.93973905]
 
 
 
@@ -254,18 +252,12 @@ plt.plot(train_x, reg.coef_[0][0]*train_x + reg.intercept_[0], "-r")
 #               y = theta1 x + theta0
 plt.ylabel("Scores")
 plt.xlabel("Hours of studying")
+plt.show()
 ```
 
 
-
-
-    Text(0.5, 0, 'Hours of studying')
-
-
-
-
     
-![png](simple_regression_files/simple_regression_16_1.png)
+![png](simple_regression_files/simple_regression_16_0.png)
     
 
 
@@ -279,11 +271,11 @@ test_y = np.asanyarray(test[['Scores']])
 test_y_ = reg.predict(test_x)
 
 print("Mean absolute error: %.2f" % np.mean(np.absolute(test_y_ - test_y)))
-print("Residual sum of squares (MSE): %.2f" % np.mean(test_y_ - test_y)**2)
+print("Residual sum of squares (MSE): %.2f" % np.mean((test_y_ - test_y)**2))
 print("R2-score: %.2f" % r2_score(test_y_, test_y))
 ```
 
-    Mean absolute error: 2.95
-    Residual sum of squares (MSE): 1.62
+    Mean absolute error: 3.17
+    Residual sum of squares (MSE): 14.37
     R2-score: 0.97
 

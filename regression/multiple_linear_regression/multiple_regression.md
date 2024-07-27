@@ -467,11 +467,11 @@ test_y = np.asanyarray(test[['Performance Index']])
 test_y_ = reg.predict(test_x)
 
 print("Mean absolute error: %.2f" % np.mean(np.absolute(test_y_ - test_y)))
-print("Residual sum of squares (MSE): %.2f" % np.mean(test_y_ - test_y)**2)
+print("Residual sum of squares (MSE): %.2f" % np.mean((test_y_ - test_y)**2))
 print("R2-score: %.2f" % r2_score(test_y_, test_y))
 ```
 
     Mean absolute error: 1.85
-    Residual sum of squares (MSE): 0.00
+    Residual sum of squares (MSE): 5.48
     R2-score: 0.99
 
