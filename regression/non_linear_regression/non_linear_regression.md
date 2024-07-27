@@ -664,7 +664,7 @@ plt.tight_layout(rect=[0, 0, 1, 0.96])
 plt.show()
 ```
 
-    /tmp/ipykernel_78817/3080679515.py:60: RuntimeWarning: divide by zero encountered in divide
+    /tmp/ipykernel_82524/3080679515.py:60: RuntimeWarning: divide by zero encountered in divide
       y = 10/(5+x)
 
 
@@ -845,7 +845,12 @@ print("R2-score: %.2f" % r2_score(y_hat , test_y) )
 ```
 
     beta_1 = 430.034235, beta_2 = 0.995297
-    Mean absolute error: 0.04
+    Mean absolute error: 0.02
     Residual sum of squares (MSE): 0.00
-    R2-score: 0.97
+    R2-score: 0.99
 
+
+
+```python
+
+```
