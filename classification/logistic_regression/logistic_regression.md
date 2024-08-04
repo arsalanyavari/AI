@@ -274,15 +274,15 @@ train_y = np.asanyarray(train[['Pass']])
 # Converting to 1D array
 train_y = train_y.ravel()  # or train_y = train_y.flatten()
 
-reg = linear_model.LogisticRegression(C=1, solver="lbfgs")
+reg = linear_model.LogisticRegression(C=1, solver="lbfgs", max_iter=10000)
 reg.fit(train_x, train_y)
 
 print("Coefficients:\t", reg.coef_)
 print("Intercept:\t", reg.intercept_)
 ```
 
-    Coefficients:	 [[0.12 0.1 ]]
-    Intercept:	 [-14.03]
+    Coefficients:	 [[0.11863908 0.09905547]]
+    Intercept:	 [-14.02571281]
 
 
 Compare predicted answers with real answers...
@@ -316,26 +316,46 @@ print(test_y_prob)
      0 0 1 0 1 0]
     
     Probability of each case:
-    [3.48e-02 9.65e-01 9.63e-01 3.69e-02 9.28e-01 7.16e-02 2.86e-03 9.97e-01
-     1.00e+00 1.14e-05 7.79e-01 2.21e-01 8.33e-01 1.67e-01 2.00e-03 9.98e-01
-     6.84e-01 3.16e-01 1.00e+00 2.45e-04 1.00e+00 3.24e-05 9.79e-01 2.13e-02
-     9.72e-01 2.76e-02 1.00e+00 2.64e-05 5.12e-02 9.49e-01 1.51e-01 8.49e-01
-     3.21e-01 6.79e-01 9.87e-01 1.29e-02 9.99e-01 7.32e-04 8.65e-01 1.35e-01
-     3.52e-01 6.48e-01 9.21e-01 7.94e-02 9.51e-01 4.93e-02 8.77e-03 9.91e-01
-     9.42e-01 5.78e-02 8.98e-01 1.02e-01 6.76e-01 3.24e-01 9.64e-01 3.55e-02
-     2.35e-02 9.77e-01 7.71e-01 2.29e-01 1.00e+00 1.25e-06 9.86e-01 1.38e-02
-     1.00e+00 6.52e-05 1.00e+00 4.75e-04 3.91e-02 9.61e-01 7.68e-01 2.32e-01
-     7.43e-01 2.57e-01 3.48e-02 9.65e-01 7.71e-01 2.29e-01 9.99e-01 1.02e-03
-     1.64e-02 9.84e-01 4.70e-02 9.53e-01 9.79e-01 2.11e-02 2.37e-01 7.63e-01
-     7.40e-01 2.60e-01 9.99e-01 8.49e-04 9.10e-01 9.04e-02 6.70e-03 9.93e-01
-     8.56e-01 1.44e-01 9.91e-01 8.86e-03 9.99e-01 1.16e-03 9.99e-01 1.08e-03
-     5.24e-01 4.76e-01 1.00e+00 4.61e-06 9.97e-01 2.55e-03 9.93e-01 7.18e-03
-     1.20e-02 9.88e-01 5.94e-03 9.94e-01 1.00e+00 4.24e-04 5.82e-01 4.18e-01
-     9.42e-01 5.76e-02 8.96e-01 1.04e-01 9.65e-01 3.49e-02 1.00e+00 1.61e-05
-     5.49e-01 4.51e-01 5.14e-01 4.86e-01 2.36e-01 7.64e-01 1.00e+00 1.60e-04
-     5.89e-02 9.41e-01 8.78e-01 1.22e-01 9.99e-01 9.84e-04 1.00e+00 1.06e-05
-     9.56e-01 4.43e-02 9.91e-01 9.29e-03 1.00e+00 3.75e-04 9.60e-01 3.95e-02
-     5.94e-01 4.06e-01 1.00e+00 4.21e-04 3.03e-01 6.97e-01 1.00e+00 2.42e-04]
+    [3.48123854e-02 9.65187615e-01 9.63136266e-01 3.68637343e-02
+     9.28384640e-01 7.16153599e-02 2.86076579e-03 9.97139234e-01
+     9.99988632e-01 1.13675741e-05 7.78741519e-01 2.21258481e-01
+     8.33130838e-01 1.66869162e-01 1.99505332e-03 9.98004947e-01
+     6.83942898e-01 3.16057102e-01 9.99755242e-01 2.44758102e-04
+     9.99967626e-01 3.23743551e-05 9.78670134e-01 2.13298658e-02
+     9.72410936e-01 2.75890645e-02 9.99973602e-01 2.63978660e-05
+     5.11837344e-02 9.48816266e-01 1.51108582e-01 8.48891418e-01
+     3.20821873e-01 6.79178127e-01 9.87080146e-01 1.29198535e-02
+     9.99267817e-01 7.32182667e-04 8.64539120e-01 1.35460880e-01
+     3.52138424e-01 6.47861576e-01 9.20550796e-01 7.94492045e-02
+     9.50702704e-01 4.92972960e-02 8.76735820e-03 9.91232642e-01
+     9.42170392e-01 5.78296082e-02 8.98205052e-01 1.01794948e-01
+     6.76438490e-01 3.23561510e-01 9.64491170e-01 3.55088301e-02
+     2.34946901e-02 9.76505310e-01 7.70824033e-01 2.29175967e-01
+     9.99998750e-01 1.25032903e-06 9.86192166e-01 1.38078342e-02
+     9.99934843e-01 6.51567545e-05 9.99525306e-01 4.74693847e-04
+     3.91142348e-02 9.60885765e-01 7.67853249e-01 2.32146751e-01
+     7.42849600e-01 2.57150400e-01 3.48076495e-02 9.65192351e-01
+     7.71188124e-01 2.28811876e-01 9.98976912e-01 1.02308772e-03
+     1.64029279e-02 9.83597072e-01 4.70483261e-02 9.52951674e-01
+     9.78913296e-01 2.10867042e-02 2.37277966e-01 7.62722034e-01
+     7.40497639e-01 2.59502361e-01 9.99150654e-01 8.49345751e-04
+     9.09575607e-01 9.04243928e-02 6.70443832e-03 9.93295562e-01
+     8.56465729e-01 1.43534271e-01 9.91138468e-01 8.86153222e-03
+     9.98840090e-01 1.15990990e-03 9.98920546e-01 1.07945375e-03
+     5.24388881e-01 4.75611119e-01 9.99995392e-01 4.60760973e-06
+     9.97450091e-01 2.54990948e-03 9.92818475e-01 7.18152496e-03
+     1.20073082e-02 9.87992692e-01 5.94297395e-03 9.94057026e-01
+     9.99576026e-01 4.23974124e-04 5.82494862e-01 4.17505138e-01
+     9.42448558e-01 5.75514420e-02 8.96014225e-01 1.03985775e-01
+     9.65107822e-01 3.48921779e-02 9.99983881e-01 1.61185215e-05
+     5.48805932e-01 4.51194068e-01 5.13959536e-01 4.86040464e-01
+     2.35686681e-01 7.64313319e-01 9.99840159e-01 1.59841133e-04
+     5.88984445e-02 9.41101555e-01 8.78481110e-01 1.21518890e-01
+     9.99015702e-01 9.84298166e-04 9.99989361e-01 1.06391746e-05
+     9.55661639e-01 4.43383608e-02 9.90708401e-01 9.29159949e-03
+     9.99625090e-01 3.74910187e-04 9.60485263e-01 3.95147368e-02
+     5.94373006e-01 4.05626994e-01 9.99578509e-01 4.21491164e-04
+     3.03189992e-01 6.96810008e-01 9.99757501e-01 2.42499494e-04]
 
 
 ### The jaccard score:
@@ -359,79 +379,52 @@ print(jaccard_score(test_y, test_y_, pos_label=1))
 
 
 ```python
-from sklearn.metrics import classification_report, confusion_matrix
-import itertools
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues):
-    """
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize=True`.
-    """
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
+from sklearn.metrics import classification_report, confusion_matrix, precision_score, recall_score
 
-    print(cm)
+import scikitplot as skplt
 
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
+accuracy = accuracy_score(test_y_, test_y_)
+precision = precision_score(test_y, test_y_)
+recall = recall_score(test_y, test_y_)
 
-    fmt = '.2f' if normalize else 'd'
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt),
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
 
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-print(confusion_matrix(test_y, test_y_, labels=[1,0]))
+
+print("Logistic Regression Classification Report:")
+print(classification_report(test_y, test_y_))
+
+print("Logistic Regression Confusion Matrix:")
+skplt.metrics.plot_confusion_matrix(test_y, test_y_)
 ```
 
-    [[17  5]
-     [ 3 55]]
+    Logistic Regression Classification Report:
+                  precision    recall  f1-score   support
+    
+               0       0.92      0.95      0.93        58
+               1       0.85      0.77      0.81        22
+    
+        accuracy                           0.90        80
+       macro avg       0.88      0.86      0.87        80
+    weighted avg       0.90      0.90      0.90        80
+    
+    Logistic Regression Confusion Matrix:
 
 
-Print confusion matrix
 
 
-```python
-cnf_matrix = confusion_matrix(test_y, test_y_, labels=[1,0])
-np.set_printoptions(precision=2)
 
+    <Axes: title={'center': 'Confusion Matrix'}, xlabel='Predicted label', ylabel='True label'>
 
-# Plot non-normalized confusion matrix
-plt.figure()
-plot_confusion_matrix(cnf_matrix, classes=['churn=1','churn=0'],normalize= False,  title='Confusion matrix')
-```
-
-    Confusion matrix, without normalization
-    [[17  5]
-     [ 3 55]]
 
 
 
     
-![png](logistic_regression_files/logistic_regression_23_1.png)
+![png](logistic_regression_files/logistic_regression_21_2.png)
     
 
 
 
 ```python
-print (classification_report(test_y, test_y_))
-TN, FP, FN, TP = cnf_matrix.ravel()
-specificity = TN / (TN + FP)
-print('Specificity:', specificity)
-print('Accuracy:', accuracy_score(test_y, test_y_))
+print(classification_report(test_y, test_y_))
 ```
 
                   precision    recall  f1-score   support
@@ -443,8 +436,6 @@ print('Accuracy:', accuracy_score(test_y, test_y_))
        macro avg       0.88      0.86      0.87        80
     weighted avg       0.90      0.90      0.90        80
     
-    Specificity: 0.7727272727272727
-    Accuracy: 0.9
 
 
 ## Result
@@ -476,6 +467,6 @@ plt.show()
 
 
     
-![png](logistic_regression_files/logistic_regression_26_0.png)
+![png](logistic_regression_files/logistic_regression_24_0.png)
     
 
