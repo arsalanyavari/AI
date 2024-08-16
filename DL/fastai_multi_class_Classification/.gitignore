@@ -1,5 +1,6 @@
 *.csv
 .ipynb_checkpoints
 [A-Z]*/
+[a-z]*/
 __pycache__
 web_scraper.py
